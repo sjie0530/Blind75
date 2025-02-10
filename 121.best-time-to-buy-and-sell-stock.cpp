@@ -9,14 +9,22 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         //unordered_map<int, int> tempMap;
-        int profit=0;
-        for(int i=0; i< prices.size(); i++){
-            for(int j=i; j < prices.size(); j++){
-                if(prices[j]-prices[i] > profit)
-                    profit = prices[j]- prices[i];
+        int left = 0;
+        int right = left + 1;
+        int max = 0;
+        while(right!=prices.size()){
+            if(prices[left] < prices[right]){
+                int profit = prices[right] - prices[left];
+                if(max < profit){
+                    max = profit;
+                }
             }
+            else{
+                left = right;
+            }
+            right++;
         }
-        return profit;
+        return max;
     }
 };
 // @lc code=end
